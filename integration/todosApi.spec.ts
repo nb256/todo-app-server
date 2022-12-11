@@ -41,4 +41,12 @@ describe("Todos API", () => {
     expect(response.status).toBe(200);
     expect(response.body.status).toBe("UNCOMPLETED");
   });
+
+  it("should delete a todo", async () => {
+    const response = await request(app).post("/todos/delete").send({
+      id: createdTodo.id,
+    });
+
+    expect(response.status).toBe(200);
+  });
 });
