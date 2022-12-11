@@ -49,4 +49,10 @@ describe("Todos API", () => {
 
     expect(response.status).toBe(200);
   });
+
+  it("should get all todos", async () => {
+    const response = await request(app).get("/todos");
+
+    expect(response.status).toBe(200);
+  });
 });

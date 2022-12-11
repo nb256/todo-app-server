@@ -2,6 +2,7 @@ import express from "express";
 
 import createTodo from "../database/createTodo";
 import deleteTodo from "../database/deleteTodo";
+import getTodos from "../database/getTodos";
 import markTodoCompleted from "../database/markTodoCompleted";
 import markTodoUncompleted from "../database/markTodoUncompleted";
 
@@ -53,6 +54,11 @@ router.post("/delete", async (req, res) => {
   const deletedTodo = await deleteTodo(parseInt(id));
 
   res.json(deletedTodo);
+});
+
+router.get("/", async (_, res) => {
+  const todos = await getTodos();
+  res.json(todos);
 });
 
 export default router;
