@@ -32,8 +32,10 @@ describe("Auth API", () => {
     });
 
     it("should return 200 if user is created", async () => {
+      const randomString = Math.random().toString(36).substring(7);
+
       const response = await request(app).post("/auth/signUp").send({
-        email: "email",
+        email: randomString,
         password: "password",
         name: "name",
       });
