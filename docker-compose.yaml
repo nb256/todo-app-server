@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/usr/src/app/
+      # node_modules workaround for volumes
+      # https://stackoverflow.com/a/32785014
+      - /usr/src/app/node_modules
+    environment:
+      DATABASE_URL: postgresql://root:password@postgres/todoapp
+      SERVER_PORT: 8080
+
+  postgres:
+    image: postgres:11.16
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_DB=todoapp
+      - POSTGRES_PASSWORD=password
+    ports:
+      # Standard port for PostgreSQL databases
+      - "5432:5432"
