@@ -2,6 +2,7 @@ import express from "express";
 
 import createTodo from "../database/createTodo";
 import markTodoCompleted from "../database/markTodoCompleted";
+import markTodoUncompleted from "../database/markTodoUncompleted";
 
 const router = express.Router();
 
@@ -25,6 +26,18 @@ router.post("/markTodoCompleted", async (req, res) => {
   }
 
   const updatedTodo = await markTodoCompleted(parseInt(id));
+
+  res.json(updatedTodo);
+});
+
+router.post("/markTodoUncompleted", async (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ error: "Id is required" });
+  }
+
+  const updatedTodo = await markTodoUncompleted(parseInt(id));
 
   res.json(updatedTodo);
 });
