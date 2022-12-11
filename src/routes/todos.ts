@@ -5,8 +5,11 @@ import deleteTodo from "../database/deleteTodo";
 import getTodos from "../database/getTodos";
 import markTodoCompleted from "../database/markTodoCompleted";
 import markTodoUncompleted from "../database/markTodoUncompleted";
+import verifyAccessToken from "../functions/verifyAccessToken";
 
 const router = express.Router();
+
+router.use(verifyAccessToken);
 
 router.post("/create", async (req, res) => {
   const { title } = req.body;
